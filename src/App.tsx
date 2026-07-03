@@ -1,13 +1,15 @@
 import Nav from "./components/Nav";
-import ParallaxHero from "./components/Hero/ParallaxHero";
+import VideoBackdrop from "./components/Hero/VideoBackdrop";
+import HeroContent from "./components/Hero/HeroContent";
 import FlingCards from "./components/Cards/FlingCards";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
+      <VideoBackdrop />
       <Nav />
-      <ParallaxHero />
+      <HeroContent />
       <FlingCards />
       <Footer />
     </>

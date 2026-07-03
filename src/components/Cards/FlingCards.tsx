@@ -4,7 +4,10 @@ import FlingCard from "./FlingCard";
 
 export default function FlingCards() {
   return (
-    <section id="discover" className="relative bg-navy px-6 py-24 md:px-12 md:py-32">
+    <section id="discover" className="relative px-6 py-24 md:px-12 md:py-32">
+      {/* Scrim over the fixed video backdrop — keeps this section content-legible
+          while the footage keeps drifting behind it. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/85 to-navy/95" />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -22,14 +25,13 @@ export default function FlingCards() {
           className="mb-12 max-w-xl"
         >
           <p className="font-display mb-3 text-xs font-semibold tracking-[0.4em] text-pink uppercase">
-            The Universe
+            [ eyebrow copy ]
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-white uppercase sm:text-5xl">
-            Step Into Her World
+            [ section heading placeholder ]
           </h2>
           <p className="mt-4 text-sm text-white/60 md:text-base">
-            Videos, releases, and moments from the story of Valerie Skyler —
-            reinvented, one frame at a time.
+            [ section subheading placeholder — send over the line you want here ]
           </p>
         </motion.div>
 
