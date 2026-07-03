@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -8,6 +9,19 @@ import {
 import EmberField from "./EmberField";
 import { HERO_MEDIA } from "./heroMedia";
 
+// Autoplay attributes alone don't guarantee playback in every embedding
+// context (iframes without an autoplay permission, some webviews). Forcing
+// .play() explicitly is a stronger guarantee than the autoplay attribute on
+// its own, and failures are caught silently since the poster frame still
+// covers us visually either way.
+function useForcePlay() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    ref.current?.play().catch(() => {});
+  }, []);
+  return ref;
+}
+
 function useDepth(mouseX: ReturnType<typeof useMotionValue<number>>, factor: number) {
   return useTransform(mouseX, (v) => v * factor);
 }
@@ -16,6 +30,7 @@ function useDepth(mouseX: ReturnType<typeof useMotionValue<number>>, factor: num
 // as there's page left to scroll, instead of being boxed into the hero alone.
 export default function VideoBackdrop() {
   const { scrollYProgress } = useScroll();
+  const bgVideoRef = useForcePlay();
 
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -280]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.4]);
@@ -35,18 +50,21 @@ export default function VideoBackdrop() {
   return (
     <div
       onPointerMove={handlePointerMove}
-      className="grain-overlay fixed inset-0 -z-10 h-screen w-full overflow-hidden bg-navy"
+      className="grain-overlay fixed inset-0 h-screen w-full overflow-hidden bg-navy"
     >
       {/* Base plane — the footage itself, never fully leaves, just keeps drifting */}
       <motion.div className="absolute inset-0" style={{ y: bgY, x: bgX, scale: bgScale }}>
         {HERO_MEDIA.background ? (
           <video
+            ref={bgVideoRef}
             className="h-full w-full object-cover"
             src={HERO_MEDIA.background}
+            poster={HERO_MEDIA.backgroundPoster ?? undefined}
             autoPlay
             loop
             muted
             playsInline
+            preload="auto"
           />
         ) : (
           <div
