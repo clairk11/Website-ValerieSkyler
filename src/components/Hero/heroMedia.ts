@@ -1,8 +1,6 @@
 // Swap in real footage by dropping files into /public/media/hero and setting the path here.
-// Any layer left `null` keeps rendering its CSS placeholder.
-export const HERO_MEDIA: Record<"sky" | "skyline" | "fog" | "silhouette", string | null> = {
-  sky: null,
-  skyline: null,
+// `fog` left `null` keeps rendering its CSS placeholder.
+export const HERO_MEDIA: Record<"background" | "fog", string | null> = {
+  background: "/media/hero/skyline-orbit.mp4",
   fog: null,
-  silhouette: null,
 };

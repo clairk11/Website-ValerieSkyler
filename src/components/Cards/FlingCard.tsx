@@ -26,7 +26,15 @@ export default function FlingCard({ card, index }: { card: CardDef; index: numbe
     >
       <div className="absolute inset-0" style={{ background: card.gradient }} />
 
-      {card.videoSrc && (
+      {card.imageSrc && (
+        <img
+          className="absolute inset-0 h-full w-full object-cover"
+          src={card.imageSrc}
+          alt={card.title}
+        />
+      )}
+
+      {!card.imageSrc && card.videoSrc && (
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src={card.videoSrc}
@@ -37,19 +45,21 @@ export default function FlingCard({ card, index }: { card: CardDef; index: numbe
         />
       )}
 
-      <div className="grain-overlay absolute inset-0" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+      {!card.imageSrc && <div className="grain-overlay absolute inset-0" />}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
 
       <div className="relative flex h-full flex-col justify-between p-6">
-        <span className="font-display w-fit text-[11px] font-semibold tracking-[0.3em] text-white/70 uppercase">
+        <span className="font-display w-fit text-[11px] font-semibold tracking-[0.3em] text-white/80 uppercase text-glow-pink">
           {card.label}
         </span>
 
         <div className="flex items-end justify-between gap-4">
-          <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">
-            {card.title}
-          </h3>
-          <span className="liquid-glass flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-transform group-hover:scale-110">
+          {!card.imageSrc && (
+            <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">
+              {card.title}
+            </h3>
+          )}
+          <span className="liquid-glass ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-transform group-hover:scale-110">
             <Play className="ml-0.5 h-4 w-4" strokeWidth={1.5} fill="currentColor" />
           </span>
         </div>

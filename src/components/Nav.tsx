@@ -30,12 +30,13 @@ export default function Nav() {
     <nav className="fixed inset-x-0 top-0 z-50">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 to-transparent backdrop-blur-[2px]" />
       <div className="relative flex items-center justify-between px-6 py-5 md:px-12">
-        <div className="flex items-baseline gap-1">
-          <span className="font-script text-3xl leading-none text-white">valerie</span>
-          <span className="font-display text-sm font-semibold tracking-[0.35em] text-white/80">
-            SKYLER
-          </span>
-        </div>
+        <a href="/" className="block">
+          <img
+            src="/media/logo/valerie-skyler-logo.png"
+            alt="Valerie Skyler"
+            className="h-14 w-auto md:h-16"
+          />
+        </a>
 
         <div className="hidden items-center gap-8 md:flex">
           {LINKS.map((link) => (
