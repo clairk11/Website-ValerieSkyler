@@ -61,9 +61,12 @@ body {
   color: #fff;
 }
 
-.grain-overlay {
-  position: relative;
-}
+/* Relies on the host element already being positioned (fixed/absolute/relative)
+   via its own Tailwind classes — every current usage satisfies that. Setting
+   `position` here would win over Tailwind's utility for the same element,
+   since Tailwind v4 wraps its utilities in a CSS cascade layer and any
+   unlayered rule (like this file's own classes) beats a layered one
+   regardless of source order. */
 .grain-overlay::after {
   content: "";
   position: absolute;
